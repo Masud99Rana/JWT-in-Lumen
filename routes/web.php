@@ -12,5 +12,23 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    // return $router->app->version();
+    // return "Welcome, Masud Rana";
+    
+    return response()->json([
+    	'success' => true,
+    	'message' => 'Welcome to my Api',
+    	'Developer' => 'Masud Rana'
+    ]);
+});
+
+
+$router->group(['prefix' => 'api/v1'], function () use ($router) {
+
+// $router->group(['middleware' => 'auth'], function() use ($router){
+
+	$router->get('/users','UsersController@index');
+	$router->post('/users', 'UsersController@store');
+	$router->patch('/users/{user}', 'UsersController@update');
+	$router->delete('/users/{user}', 'UsersController@destroy');
 });

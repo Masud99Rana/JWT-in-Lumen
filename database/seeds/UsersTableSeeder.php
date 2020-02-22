@@ -11,11 +11,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        
+        
         for($i=0; $i<10;$i++){
             $name = "Masud".rand('1','99');
         	DB::table('users')->insert([
 				'name' => $name,
-				'email' => $name.'@gmail.com',
+				'email' => $name.$i.'@gmail.com',
 				'password' => app('hash')->make('mypass')
 			]);
         }

@@ -22,12 +22,15 @@ $router->get('/', function () use ($router) {
     ]);
 });
 
+$router->post('/register','ExampleController@register');
 
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
 // $router->group(['middleware' => 'auth'], function() use ($router){
 
-	$router->get('/users','UsersController@index');
+	$router->post('auth/login', [ 'uses' => 'AuthController@authenticate']);
+	
+	$router->get('/users',['middleware' => 'auth:api', 'uses' => 'UsersController@index']);
 	$router->post('/users', 'UsersController@store');
 	$router->patch('/users/{user}', 'UsersController@update');
 	$router->delete('/users/{user}', 'UsersController@destroy');

@@ -10,7 +10,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {	
+    	DB::table('users')->truncate();
         $this->call('UsersTableSeeder');
     }
 }
